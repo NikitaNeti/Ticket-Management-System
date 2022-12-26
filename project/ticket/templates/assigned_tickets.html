@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Assigned Tickets {% endblock %}
+{% block main %}
+
+
+<body class="animsition">
+    <div class="page-wrapper">
+            <div id="maintiks" style="max-width:90%;margin:auto;">
+
+            <div class="col-lg-9" style="flex: 0 0 100% !important;max-width: 100% !important;">
+                                            <div class="table-responsive table--no-card m-b-30">
+                                                <table class="table table-borderless table-striped table-earning">
+                                                    <thead>
+                                                        <tr>
+                                                          <form method="POST">{% csrf_token %}
+                                                            <th><button name="ordr" type="submit" style="color:white;" value="-id">Ticket ID</button></th>
+                                                            <th><button name="ordr" type="submit" style="color:white;" value="-type">Email</button></th>
+                                                            <th><button name="ordr" type="submit" style="color:white;" value="-date_created">Mobile </button></th>
+                                                            <th>Date Created</th>
+                                                            <th><button name="ordr" type="submit" style="color:white;" value="-status">Priority </button></th>
+                                                            <th><button name="ordr" type="submit" style="color:white;" value="-title">Assets </button></th>
+                                                            <th>Status</th>
+                                                            <th>Update-status</th>
+                                                          </form>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      {% for ticket in tickets %}
+                                                        <tr>
+                                                            <td>{{ticket.id}}</td>
+                                                            <td>{{ticket.user}}</td>
+                                                            <td>{{ticket.mobile}}</td>
+                                                            <td>{{ticket.created_at}}</td>
+                                                            <td style=color:#FF0000>{{ticket.priority}}</td>
+                                                            <td>{{ ticket.assets}}</td>
+                                                            <td style=color:#FF0000>
+
+                                                              <form action="{% url 'update_ticket_status' ticket.id %}" method="POST">
+                                                                  {% csrf_token %}
+                                                                
+                                                                   <select name="status" id="cars">
+                                                                     <option value="{{ticket.ticketstatus}}">{{ticket.ticketstatus}}</option>
+                                                                     <option value="Approved">Approved</option>
+                                                                     <option value="Ready-to-dispatch">Ready-to-dispatch</option>
+                                                                     <option value="Dispatched">Dispatched</option>
+                                                                     <option value="Closed">Closed</option>
+                                                                   </select>
+                                                                   <br><br>
+                                                            </td>
+                                                            
+
+                                                            <td>
+                                                              <button type="submit"  class="btn btn-primary mb-1">Update</button>
+                                                            </td>
+                                                        </form>
+
+                                                        </tr>
+                                                      {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                           
+                                        </div>
+
+            </div>
+            <!-- END MAIN-->
+      {% endblock %}
+

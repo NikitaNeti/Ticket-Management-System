@@ -1,0 +1,67 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <!-- END WELCOME-->
+    <!-- MAIN-->
+
+    <div class="page-content--bgf7">
+        <!-- WELCOME-->
+        <section class="welcome p-t-10">
+          <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title-4">  Tickets Today
+                            <span> </span>
+                        </h1>
+                        <hr class="line-seprate">
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
+    <div id="maintiks" style="max-width:90%;margin:auto;">
+
+        <style>
+            .flex-container {
+              display: flex;
+              background-color: DodgerBlue;
+            }
+            
+            .flex-container > div {
+              background-color: #f1f1f1;
+              margin: 50px;
+              padding: 40px;
+              font-size: 30px;
+            }
+
+        </style>
+        <body>
+            
+            <div class="flex-container">
+              <div id="flex">
+                <span>Active Ticket</span> <br>
+                <span> {{ active_ticket }} </span>
+
+              </div>
+              <div id="flex">
+                <span>Closed Ticket</span> <br>
+              <span> {{ closed_ticket }}</span> 
+              </div>
+              <div id="">
+                <span>Resolved Ticket</span> <br>
+                <span>{{ resolved_ticket }} </span>
+             
+              </div>  
+              <div id="">
+                <span>Agent Working </span> <br>
+                <span>{{ agents_count }} </span>
+
+              </div>  
+        </div>
+    </div>
+
+    {% endblock %}

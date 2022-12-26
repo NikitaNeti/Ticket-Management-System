@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+ <div class="page-content--bgf7">
+    <!-- MAIN-->
+    <div class="main-content" style="padding:1% 10%;max-width:1000px;margin:auto;">
+    <form method="post" class="form-signin" enctype='multipart/form-data' novalidate>
+    <img src="{% static 'img/logo.png' %}" style="width:50%;margin-bottom: 32px;" class="logod" alt="company logo">
+    <h1 class="h3 mb-3 font-weight-normal">Add New Employe Here</h1>
+    {% csrf_token %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<style>
+    .errorlist
+    {
+        color: red;
+    }
+</style>
+
+
+{{forms.non_field_errors }}
+{% for fm in form %}
+     <div>
+      {{fm.label_tag}} {{fm}} <span class="errorlist">
+      {{fm.errors|striptags}} </span>
+     </div>  
+  {% endfor %}
+
+                   
+
+
+    <button type="submit" class="signbtn btn btn-primary" style="width:48%;">Add User </button>
+    </form>
+    </div>
+    {% endblock %}

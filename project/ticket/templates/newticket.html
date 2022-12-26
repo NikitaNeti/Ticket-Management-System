@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+  $(document).ready(function(){
+    $('select#id_user').change(function (event) {
+           
+               var optionSelected = $(this).find("option:selected");
+               var valueSelected  = optionSelected.val();
+          
+               $.ajax({
+            type:"GET",
+            url:"{% url 'test'  %}",
+            
+            data: {id :valueSelected},
+            success:function(data){
+                document.getElementById("id_mobile").value =data.mobile
+            }
+            })
+         }
+        )
+     }
+    )
+
+</script>
+
+{% endblock %}
+
+
+
+{% block main %}
+
+<style>
+  .errorlist
+  {
+      color: red;
+  }
+</style>
+<body class="animsition">
+    <div class="page-wrapper">
+  
+        <div class="page-content--bgf7" >
+            <div class="main-content" style="padding:100px 200px;max-width:1000px;margin:auto;" >
+            <form method="POST" class="form-signin" style="background-color: #d3d3d3;" novalidate> 
+            <img src="{% static 'img/logo.png' %}" style="width:50%;margin-bottom: 32px;" class="logod" alt="company logo">
+            <h1 class="h3 mb-3 font-weight-normal" style="color: white"> Generate Ticket</h1> <br>
+            {% csrf_token %}
+            
+       
+        {{forms.non_field_errors }}
+        {% for fm in form %}
+             <div>
+              {{fm.label_tag}} {{fm}} <span class="errorlist">
+              {{fm.errors|striptags}} </span>
+             </div>  
+          {% endfor %}
+
+            <button type="submit" class="signbtn btn btn-primary" style="width:48%;">Submit Ticket </button> 
+            </form>
+            <br>
+            </div>
+
+	
+{% endblock %}
+      
+
